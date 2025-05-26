@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.8.0;
+
+import "forge-std/Script.sol";
+import "@aerodrome-finance/contracts/contracts/PoolFactory.sol";
+
+contract DeployCbBTCPool is Script {
+    function run() external {
+        vm.startBroadcast();
+        PoolFactory factory = PoolFactory(0xF56D0C9A83D9604a0C8dE0a4b7e947C3B5C7bEc0); // Aerodrome PoolFactory
+        address cbBTC = 0xcbB7C0000aB88B473b1fD03aF8311b85595B2e8f; // cbBTC on Base
+        address weth = 0x4200000000000000000000000000000000000006; // WETH on Base
+        factory.createPool(cbBTC, weth, true, 500); // Stable pool, 0.05% fee
+        vm.stopBroadcast();
+    }
+}
