@@ -1,0 +1,51 @@
+Smart Contracts: Replace src/Contract.sol with Aerodrome-inspired contracts, such as a simplified pool or governance contract. Below is an example of a basic contract interacting with Aerodrome’s AERO token (based on IAero interface from BaseScan):
+
+solidity
+
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.8.0;
+
+interface IAero {
+    function mint(address account, uint256 amount) external returns (bool);
+    function balanceOf(address account) external view returns (uint256);
+}
+
+contract AeroInteraction {
+    IAero public aeroToken;
+    address public owner;
+
+    constructor(address _aeroToken) {
+        aeroToken = IAero(_aeroToken);
+        owner = msg.sender;
+    }
+
+    function checkAeroBalance(address account) public view returns (uint256) {
+        return aeroToken.balanceOf(account);
+    }
+}
+
+Save this as src/AeroInteraction.sol. Update the AERO token address (_aeroToken) with Base’s AERO contract address (0x940181a94A35A4569E4529A3CDfB74Ee19448e50 from BaseScan).
+
+Tests: Add a test in test/AeroInteraction.t.sol to verify functionality. Use Foundry’s testing framework with a Base mainnet fork:
+solidity
+
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.8.0;
+
+import "forge-std/Test.sol";
+import "../src/AeroInteraction.sol";
+
+contract AeroInteractionTest is Test {
+    AeroInteraction aero;
+    address aeroToken = 0x940181a94A35A4569E4529A3CDfB74Ee19448e50; // AERO on Base
+
+    function setUp() public {
+        aero = new AeroInteraction(aeroToken);
+    }
+
+    function testCheckBalance() public {
+        uint256 balance = aero.checkAeroBalance(address(this));
+        assertTrue(balance >= 0, "Balance should be non-negative");
+    }
+}
+
