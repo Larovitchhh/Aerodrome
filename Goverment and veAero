@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.8.0;
+
+interface IVotingEscrow {
+    function create_lock(uint256 _value, uint256 _lock_duration) external;
+}
+
+contract VeAeroVoter {
+    IVotingEscrow public veAero;
+    address public owner;
+
+    constructor(address _veAero) {
+        veAero = IVotingEscrow(_veAero);
+        owner = msg.sender;
+    }
+
+    function lockAero(uint256 amount, uint256 duration) external {
+        require(msg.sender == owner, "Only owner");
+        veAero.create_lock(amount, duration);
+    }
+}
