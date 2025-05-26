@@ -1,0 +1,9 @@
+Aerodrome Finance is the leading DEX on Base, launched on August 28, 2023, as a fork of Velodrome V2, utilizing the ve(3,3) model by Andre Cronje. It serves as the central liquidity hub for Base, with over $1.4 billion in Total Value Locked (TVL) and 90% of Base’s trading volume through its Slipstream pools. Recent developments include significant TVL growth (from $120M to over $1B in 2024), support for native USDC and liquid staked tokens (e.g., cbETH, wstETH), and integration with AI agent tokens like Virtuals Protocol’s $LUNA. The repository could focus on:
+Smart Contracts: Extending or interacting with Aerodrome’s contracts (e.g., PoolFactory, VotingEscrow).
+
+Bots: Building Discord or trading bots, inspired by velodrome-finance/bots.
+
+Documentation: Guides for liquidity provision or governance.
+
+Tools: Scripts for analyzing AERO emissions or integrating with Base’s ecosystem (e.g., cbBTC trading).
+
